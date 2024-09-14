@@ -65,4 +65,14 @@ const addBookHandler = (request, h) => {
   }
 };
 
-module.exports = { addBookHandler };
+const getAllBooks = (request, h) => {
+  const response = h.response({
+    status: "success",
+    data: {
+      books,
+    },
+  });
+  return response;
+};
+
+module.exports = { addBookHandler, getAllBooks };

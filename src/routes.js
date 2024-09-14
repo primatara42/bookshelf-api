@@ -1,4 +1,4 @@
-const {addBookHandler} = require("./handler");
+const { addBookHandler, getAllBooks } = require("./handler");
 
 const routes = [
   {
@@ -11,7 +11,7 @@ const routes = [
     // API untuk menampilkan buku
     method: "GET",
     path: "/books",
-    handler: () => {},
+    handler: getAllBooks,
   },
   {
     // API untuk menampilkan detail buku
@@ -29,8 +29,8 @@ const routes = [
     // API untuk menghapus data buku
     method: "DELETE",
     path: "/books/{bookId}",
-    handler: () => {}
-  }
+    handler: () => {},
+  },
 ];
 
 module.exports = routes;
