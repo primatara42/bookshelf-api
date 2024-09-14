@@ -1,9 +1,11 @@
+const {addBookHandler} = require("./handler");
+
 const routes = [
   {
     // API untuk menyimpan buku
     method: "POST",
     path: "/books",
-    handler: () => {},
+    handler: addBookHandler,
   },
   {
     // API untuk menampilkan buku
