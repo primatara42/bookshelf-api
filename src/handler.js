@@ -15,7 +15,7 @@ const addBookHandler = (request, h) => {
   const id = nanoid(16);
   const createdAt = new Date().toISOString();
   const updatedAt = createdAt;
-  const finished = false;
+  const finished = readPage === pageCount ? true : false;
 
   if (!name) {
     const response = h.response({
@@ -106,9 +106,26 @@ const editBookByIdHandler = (request, h) => {
     reading,
   } = request.payload;
   const { bookId } = request.params;
+  const finished = readPage === pageCount ? true : false;
   const updatedAt = new Date().toISOString();
   const index = books.findIndex((book) => book.id === bookId);
   if (index !== -1) {
+    if (!name) {
+      const response = h.response({
+        status: "fail",
+        message: "Gagal memperbarui buku. Mohon isi nama buku",
+      });
+      response.code(400);
+      return response;
+    } else if (readPage > pageCount) {
+      const response = h.response({
+        status: "fail",
+        message:
+          "Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount",
+      });
+      response.code(400);
+      return response;
+    }
     books[index] = {
       ...books[index],
       name,
@@ -120,6 +137,7 @@ const editBookByIdHandler = (request, h) => {
       readPage,
       reading,
       updatedAt,
+      finished
     };
     const response = h.response({
       status: "success",
