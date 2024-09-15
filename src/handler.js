@@ -76,15 +76,62 @@ const getAllBooks = (request, h) => {
 };
 
 const getBookByIdHandler = (request, h) => {
-  const { id } = request.params;
-  const book = books.filter((book) => book.id === id)[0];
+  const { bookId } = request.params;
+  const book = books.filter((book) => book.id === bookId)[0];
+  if (book !== undefined) {
+    return {
+      status: "success",
+      data: {
+        book,
+      },
+    };
+  }
   const response = h.response({
-    status: "success",
-    data: {
-      book
-    },
+    status: "fail",
+    message: "Buku tidak ditemukan!",
   });
+  response.code(404);
   return response;
 };
 
-module.exports = { addBookHandler, getAllBooks, getBookByIdHandler };
+// const editBookByIdHandler = (request, h) => {
+//   const {
+//     name,
+//     year,
+//     author,
+//     summary,
+//     publisher,
+//     pageCount,
+//     readPage,
+//     reading,
+//   } = request.payload;
+//   const { id } = request.params;
+//   const updatedAt = new Date().toISOString();
+//   const index = books.findIndex((book) => book.id === id);
+//   if (index !== -1) {
+//     books[index] = {
+//       ...books[index],
+//       name,
+//       year,
+//       author,
+//       summary,
+//       publisher,
+//       pageCount,
+//       readPage,
+//       reading,
+//       updatedAt,
+//     };
+//     const response = h.response({
+//       status: "success",
+//       message: "Buku berhasil diperbarui",
+//     });
+//     response.code(200);
+//     return response;
+//   }
+// };
+
+module.exports = {
+  addBookHandler,
+  getAllBooks,
+  getBookByIdHandler,
+};

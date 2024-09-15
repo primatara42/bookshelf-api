@@ -2,6 +2,7 @@ const {
   addBookHandler,
   getAllBooks,
   getBookByIdHandler,
+
 } = require("./handler");
 
 const routes = [
@@ -27,7 +28,7 @@ const routes = [
     // API untuk mengubah data buku
     method: "PUT",
     path: "/books/{bookId}",
-    handler: () => {},
+    handler: () => {}
   },
   {
     // API untuk menghapus data buku
