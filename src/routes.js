@@ -3,6 +3,7 @@ const {
   getAllBooks,
   getBookByIdHandler,
   editBookByIdHandler,
+  deleteBookByIdHandler,
 } = require("./handler");
 
 const routes = [
@@ -34,7 +35,7 @@ const routes = [
     // API untuk menghapus data buku
     method: "DELETE",
     path: "/books/{bookId}",
-    handler: () => {},
+    handler: deleteBookByIdHandler,
   },
 ];
 
