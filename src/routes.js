@@ -1,4 +1,8 @@
-const { addBookHandler, getAllBooks } = require("./handler");
+const {
+  addBookHandler,
+  getAllBooks,
+  getBookByIdHandler,
+} = require("./handler");
 
 const routes = [
   {
@@ -17,7 +21,7 @@ const routes = [
     // API untuk menampilkan detail buku
     method: "GET",
     path: "/books/{bookId}",
-    handler: () => {},
+    handler: getBookByIdHandler,
   },
   {
     // API untuk mengubah data buku
