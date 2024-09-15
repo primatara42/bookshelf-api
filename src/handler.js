@@ -69,9 +69,14 @@ const getAllBooks = (request, h) => {
   const response = h.response({
     status: "success",
     data: {
-      books,
+      books: books.map((book) => ({
+        id: book.id,
+        name: book.name,
+        publisher: book.publisher,
+      })),
     },
   });
+  response.code(200);
   return response;
 };
 
@@ -82,13 +87,26 @@ const getBookByIdHandler = (request, h) => {
     return {
       status: "success",
       data: {
-        book,
+        book: {
+          id: book.id,
+          name: book.name,
+          year: book.year,
+          author: book.author,
+          summary: book.summary,
+          publisher: book.publisher,
+          pageCount: book.pageCount,
+          readPage: book.readPage,
+          finished: book.finished,
+          reading: book.reading,
+          insertedAt: book.createdAt,
+          updatedAt: book.updatedAt,
+        },
       },
     };
   }
   const response = h.response({
     status: "fail",
-    message: "Buku tidak ditemukan!",
+    message: "Buku tidak ditemukan",
   });
   response.code(404);
   return response;
